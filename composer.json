@@ -1,0 +1,12 @@
+{
+    "require": {
+        "erusev/parsedown": "^1.7",
+        "erusev/parsedown-extra": "^0.8.1",
+        "scrivo/highlight.php": "^9.18"
+    },
+    "autoload": {
+        "psr-4": {
+            "sixlive\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,158 @@
+body {
+    font-family: "Comic Sans MS", cursive;
+    background-color: #2a0a4a;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" /></svg>');
+    background-size: 50px 50px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 48px;
+    color: #ff00ff;
+    text-shadow: 2px 2px #00ffff;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: #00ff00;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+#about, #recent-posts {
+    width: 48%;
+}
+
+#projects, #badges {
+    width: 100%;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background-color: #4a0a2a;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.project-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.badge-container img {
+    max-width: 88px;
+    max-height: 31px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+/* Snorpscape Sailor styles */
+#catscape-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background-color: #c0c0c0;
+    border: 2px outset #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+#catscape-container.hidden {
+    display: none;
+}
+
+#catscape-titlebar {
+    background-color: #000080;
+    color: #fff;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#catscape-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#catscape-addressbar {
+    background-color: #fff;
+    padding: 5px;
+}
+
+#catscape-url {
+    width: 100%;
+    border: 1px inset #808080;
+}
+
+#catscape-frame {
+    flex-grow: 1;
+    border: none;
+}
+
+#catscape-statusbar {
+    background-color: #c0c0c0;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Webamp styles */
+#webamp-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}

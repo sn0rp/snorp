@@ -1,0 +1,11 @@
+/vendor/
+/.env
+/.idea/
+/.DS_Store
+/.vscode/
+/node_modules/
+npm-debug.log
+yarn-error.log
+*.log
+*.cache
+*.tmp
