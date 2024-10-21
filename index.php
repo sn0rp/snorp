@@ -144,7 +144,6 @@ $visitCount = incrementVisitCount();
                             <img src="images/badges/badgemath.png" alt="Badge">
                             <img src="images/badges/badgephysics.png" alt="Badge">
                             <img src="images/badges/Archlinux_80x15.png" alt="Badge">
-                            <img src="images/badges/antwerp.png" alt="Badge">
                             <img src="images/badges/boeken.gif" alt="Badge">
                             <img src="images/badges/f-22_6.gif" alt="Badge">
                             <img src="images/badges/fl_isr.gif" alt="Badge">
@@ -154,7 +153,6 @@ $visitCount = incrementVisitCount();
                             <img src="images/badges/nvidia.gif" alt="Badge">
                             <img src="images/badges/piano.gif" alt="Badge">
                             <img src="images/badges/texan.gif" alt="Badge">
-                            <img src="images/badges/us_open.gif" alt="Badge">
                             <img src="images/badges/vim_the_editor.png" alt="Badge">
                             <img src="images/badges/xp.gif" alt="Badge">
                         </div>

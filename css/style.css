@@ -190,6 +190,7 @@ footer {
     display: flex;
     flex-direction: column;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
 }
 
 #catscape-container.hidden {
@@ -385,7 +386,7 @@ body.blog-page a:hover {
 #mouse-follower {
     position: fixed;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 9998;
     width: 40px;
     height: 40px;
     background-image: url('/images/snorp-sprite.png');
@@ -409,7 +410,7 @@ body.blog-page a:hover {
     color: #ffffff;
     background-color: #000000;
     user-select: none;
-    z-index: 9999;
+    z-index: 9998;
     border-radius: 50%;
     width: 60px;
     height: 30px;
