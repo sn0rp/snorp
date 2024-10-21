@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const catscapeFrame = document.getElementById('catscape-frame');
     const catscapeUrl = document.getElementById('catscape-url');
     const catscapeClose = document.getElementById('catscape-close');
+    const catscapeOpenMain = document.getElementById('catscape-open-main');
     const catscapeStatus = document.getElementById('catscape-status');
     const catscapeMetaTitle = document.getElementById('catscape-meta-title');
 
@@ -19,16 +20,29 @@ document.addEventListener('DOMContentLoaded', () => {
         catscapeFrame.src = 'about:blank';
     }
 
-    document.querySelectorAll('.catscape-link').forEach(link => {
+    function openInMainWindow() {
+        const currentUrl = catscapeFrame.src;
+        window.location.href = currentUrl;
+        closeCatscape();
+    }
+
+    document.querySelectorAll('.catscape-link, .external-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            openCatscape(link.href);
+            if (link.classList.contains('external-link')) {
+                window.open(link.href, '_blank');
+            } else if (link.getAttribute('href') === 'index.php') {
+                window.location.href = link.href;
+            } else {
+                openCatscape(link.href);
+            }
         });
     });
 
     catscapeClose.addEventListener('click', closeCatscape);
+    catscapeOpenMain.addEventListener('click', openInMainWindow);
 
-    catscapeFrame.addEventListener('load', () => {
+    function handleIframeLoad() {
         catscapeStatus.textContent = 'Done';
         try {
             const frameDocument = catscapeFrame.contentDocument || catscapeFrame.contentWindow.document;
@@ -36,8 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (metaTitle) {
                 catscapeMetaTitle.textContent = metaTitle.textContent;
             }
+            
+            // Add event listeners to all links in the iframe
+            frameDocument.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openCatscape(link.href);
+                });
+            });
         } catch (error) {
             console.error('Error accessing iframe content:', error);
         }
-    });
+    }
+
+    catscapeFrame.addEventListener('load', handleIframeLoad);
 });

@@ -9,3 +9,6 @@ yarn-error.log
 *.log
 *.cache
 *.tmp
+/music/*.mp3
+/music/*.wav
+visit_count.txt

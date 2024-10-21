@@ -1,18 +1,90 @@
 body {
-    font-family: "Comic Sans MS", cursive;
+    font-family: "IBM Plex Mono", monospace;
     background-color: #2a0a4a;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" /></svg>');
-    background-size: 50px 50px;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+        radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+    animation: backgroundScroll 60s linear infinite;
     color: #fff;
     margin: 0;
     padding: 0;
+    position: relative;
+    overflow-x: hidden;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100vh; /* Add this line */
+    overflow-y: auto; /* Add this line */
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(125deg, #2a0a4a 0%, #4a0a2a 100%);
+    opacity: 0.7;
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    opacity: 0.3;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes backgroundScroll {
+    0% {
+        background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+    }
+    100% {
+        background-position: 550px 550px, 390px 410px, 380px 820px, 220px 650px;
+    }
+}
+
+.page-wrapper {
+    display: flex; /* Add this line */
+    flex-direction: column; /* Add this line */
+    padding: 14px;
+    box-sizing: border-box;
 }
 
 .container {
     max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: 1px solid #8a2be2;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+    .page-wrapper {
+        padding: 10px;
+    }
+    .container {
+        padding: 10px;
+        width: 100%;
+    }
 }
 
 header {
@@ -20,10 +92,8 @@ header {
     margin-bottom: 20px;
 }
 
-h1 {
-    font-size: 48px;
-    color: #ff00ff;
-    text-shadow: 2px 2px #00ffff;
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Comic Sans MS", cursive;
 }
 
 nav {
@@ -31,7 +101,6 @@ nav {
 }
 
 nav a {
-    color: #00ff00;
     text-decoration: none;
     margin: 0 10px;
     font-size: 18px;
@@ -43,9 +112,9 @@ main {
     justify-content: space-between;
 }
 
-section {
+/*section {
     margin-bottom: 20px;
-}
+}*/
 
 #about, #recent-posts {
     width: 48%;
@@ -55,22 +124,39 @@ section {
     width: 100%;
 }
 
+@media (max-width: 1024) {
+    #about, #recent-posts {
+        width: 100%;
+    }
+}
+
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
 }
 
+@media (max-width: 480px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .project-card {
-    background-color: #4a0a2a;
+    /*background-color: #4a0a2a;*/
     padding: 10px;
     border-radius: 5px;
     text-align: center;
 }
 
+a {
+    color: #00ff00
+}
+
 .project-card img {
     max-width: 100%;
     height: auto;
+    border-radius: 20px;
 }
 
 .badge-container {
@@ -87,8 +173,8 @@ section {
 
 footer {
     text-align: center;
-    margin-top: 20px;
     font-size: 14px;
+    position: relative;
 }
 
 /* Snorpscape Sailor styles */
@@ -119,12 +205,38 @@ footer {
     align-items: center;
 }
 
+#catscape-titlebar span {
+    flex: 1;
+    text-align: left;
+}
+
+#catscape-open-main {
+    background-color: #0000ff;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 3px;
+    flex: 0 1 auto;
+}
+
+#catscape-open-main:hover {
+    background-color: #45a049;
+}
+
 #catscape-close {
     background: none;
     border: none;
-    color: #fff;
+    color: white;
     font-size: 20px;
     cursor: pointer;
+    padding: 0 10px;
+    flex: 0 1 auto;
 }
 
 #catscape-addressbar {
@@ -152,7 +264,313 @@ footer {
 /* Webamp styles */
 #webamp-container {
     position: fixed;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
     z-index: 9999;
+    width: 330px;
 }
+
+@media (max-width: 1024px) {
+    #webamp-container {
+        display: none;
+    }
+}
+
+article {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.centered-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+pre[class*="language-"] {
+    width: 60%;
+    max-width: 800px;
+    margin: 1em 0;
+}
+
+.centered-content pre[class*="language-"] {
+    scrollbar-width: thin;
+    scrollbar-color: #808080 #c0c0c0;
+}
+
+.centered-content pre[class*="language-"]::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.centered-content pre[class*="language-"]::-webkit-scrollbar-track {
+    background: #c0c0c0;
+    border: 1px solid #808080;
+}
+
+.centered-content pre[class*="language-"]::-webkit-scrollbar-thumb {
+    background-color: #808080;
+    border: 1px outset #ffffff;
+}
+
+.centered-content pre[class*="language-"]::-webkit-scrollbar-corner {
+    background-color: #c0c0c0;
+}
+
+/* Blog page background */
+body.blog-page {
+    background-color: #001a33;
+    background-image: 
+        linear-gradient(45deg, #002b54 25%, transparent 25%, transparent 75%, #002b54 75%, #002b54),
+        linear-gradient(-45deg, #003366 25%, transparent 25%, transparent 75%, #003366 75%, #003366),
+        radial-gradient(circle at 50% 50%, #004080 10%, transparent 20%),
+        radial-gradient(circle at 25% 75%, #004d99 5%, transparent 10%),
+        radial-gradient(circle at 75% 25%, #0059b3 15%, transparent 20%);
+    background-size: 100px 100px, 120px 120px, 300px 300px, 200px 200px, 250px 250px;
+    background-position: 0 0, 50px 50px, 0 0, 100px 100px, 50px 50px;
+    animation: none;
+    padding: 20px;
+}
+
+body.blog-page::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(125deg, rgba(0, 26, 51, 0.7) 0%, rgba(0, 51, 102, 0.7) 100%);
+    z-index: -1;
+}
+
+/* Adjust container for blog page */
+body.blog-page .container {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid #0077be;
+    box-shadow: 0 0 10px rgba(0, 119, 190, 0.5);
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {
+    color: #8a2be2;
+    text-shadow: 0 0 2px rgba(138, 43, 226, 1);
+}
+
+/* Adjust headings for blog page */
+body.blog-page h1, 
+body.blog-page h2, 
+body.blog-page h3, 
+body.blog-page h4, 
+body.blog-page h5, 
+body.blog-page h6 {
+    color: #0077be;
+    text-shadow: 0 0 2px rgba(0, 119, 190, 0.5);
+}
+
+/* Adjust links for blog page */
+body.blog-page a {
+    color: #00a8e8;
+    text-decoration: none;
+}
+
+body.blog-page a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 2px rgba(0, 168, 232, 0.5);
+}
+
+#mouse-follower {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 40px;
+    height: 40px;
+    background-image: url('/images/snorp-sprite.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: transform 0.1s ease-out;
+}
+
+.rainbow-hr {
+    height: 4px; /* Adjust thickness */
+    border: none;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+}
+
+#dvd-logo {
+    position: fixed;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #ffffff;
+    background-color: #000000;
+    user-select: none;
+    z-index: 9999;
+    border-radius: 50%;
+    width: 60px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-buttons {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.toggle-button {
+    font-family: "Comic Sans MS", cursive;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    padding: 2px;
+    margin: 0 5px;
+    cursor: pointer;
+    color: #000000;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-button:active {
+    border-style: inset;
+}
+
+.toggle-button:hover {
+    background-color: #d3d3d3;
+}
+
+.badge-scroll-container {
+    width: 80px;
+    height: 15px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+}
+
+.badge-scroll {
+    display: flex;
+    position: absolute;
+    left: 0;
+    animation: scroll-badges 48s linear infinite;
+}
+
+.badge-scroll img {
+    width: 80px;
+    height: 15px;
+    flex-shrink: 0;
+    object-fit: cover;
+    margin-right: 8px; /* Add gap between badges */
+}
+
+@keyframes scroll-badges {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-80px * 16)); /* Adjust for the number of badges */
+    }
+}
+
+.badge-scroll::after {
+    content: "";
+    display: block;
+    width: 80px; /* Width of container */
+}
+
+.badge-scroll-container::before,
+.badge-scroll-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 20px;
+    height: 100%;
+    z-index: 2;
+}
+
+.badge-scroll-container::before {
+    left: 0;
+    background: linear-gradient(to right, #2a0a4a, transparent);
+}
+
+.badge-scroll-container::after {
+    right: 0;
+    background: linear-gradient(to left, #2a0a4a, transparent);
+}
+
+#hit-counter {
+    font-family: "Comic Sans MS", cursive;
+    text-align: center;
+    color: cyan;
+}
+
+#hit-counter span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#hit-counter .counter {
+    font-family: 'Press Start 2P', cursive;
+    display: inline-block;
+    background-color: #000;
+    padding: 5px;
+    border: 2px solid cyan;
+}
+
+#hit-counter .digit {
+    display: inline-block;
+    background-color: #000;
+    padding: 2px;
+    margin-bottom: 2px;
+    border: 1px solid cyan;
+    font-size: 8px;
+}
+
+@media (min-width: 1440px) {
+    #howard {
+        position: fixed;
+        top: 20px;
+        left: 0;
+    }
+    #jupiter {
+        position: absolute;
+        top: 40px;
+        left: 50%; /* Start from the horizontal center */
+        transform: translate(-380px, 0px);
+        width: 96px; /* or whatever size you prefer */
+        height: auto; /* maintain aspect ratio */
+    }
+    #datboi {
+        position: absolute;
+        bottom: 10px;
+        right: 0%; /* Start from the horizontal center */
+        /*transform: translate(338px, 1220px);*/
+        width: 60px; /* or whatever size you prefer */
+        height: auto; /* maintain aspect ratio */
+    }
+    #sasha {
+        position: absolute;
+        top: 22px;
+        left: 50%; /* Start from the horizontal center */
+        width: 144px; /* or whatever size you prefer */
+        transform: translate(268px, 0px);
+        height: auto; /* maintain aspect ratio */
+    }
+}
+
+@media (max-width: 1439px) {
+    #howard,
+    #jupiter,
+    #datboi,
+    #sasha {
+        display: none;
+    }
+}
+
+
+
+
+
