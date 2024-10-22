@@ -13,6 +13,7 @@ function getPostList() {
         ];
     }, $posts);
 }
+
 $parsedown = new Parsedown();
 $posts = getPostList();
 
@@ -34,6 +35,12 @@ if (isset($_GET['post'])) {
         $postContent = file_get_contents($postFile);
         $postTitle = getPostTitle($postFile);
         $postHtml = $parsedown->text($postContent);
+        
+        // Format code blocks for Prism
+        $postHtml = preg_replace_callback('/<pre><code class="language-([^"]+)">/', function($matches) {
+            return '<pre><code class="language-' . $matches[1] . '">';
+        }, $postHtml);
+        
         $postHtml = preg_replace('/<pre><code class="language-([^"]+)">/', '<div class="centered-content"><pre><code class="language-$1">', $postHtml);
         $postHtml = str_replace('</code></pre>', '</code></pre></div>', $postHtml);
     } else {
@@ -49,15 +56,15 @@ if (isset($_GET['post'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snorp Thoughts</title>
     <link rel="icon" href="/images/snorp-sprite.png" type="image/png">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/catscape.js" defer></script>
-    <link rel="stylesheet" href="css/prism-dracula.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs/plugins/autoloader/prism-autoloader.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-cpp.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/catscape.js" defer></script>
+    <link rel="stylesheet" href="/css/prism-dracula.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="blog-page">
     <svg style="display: none;">
@@ -78,7 +85,7 @@ if (isset($_GET['post'])) {
         <header>
             <h1>Snorp Thoughts</h1>
             <nav>
-                <a href="index.php" class="home-link">
+                <a href="/" class="home-link">
                     <svg class="icon"><use xlink:href="#icon-house"></use></svg>
                 </a>
                 <a href="https://github.com/sn0rp" class="external-link">
@@ -100,7 +107,7 @@ if (isset($_GET['post'])) {
                 <ul>
                     <?php foreach ($posts as $post): ?>
                         <li>
-                            <a href="?post=<?= basename($post['file'], '.md') ?>" class="catscape-link">
+                            <a href="/blog/<?= basename($post['file'], '.md') ?>" class="catscape-link">
                                 <?= $post['title'] ?>
                             </a>
                         </li>

@@ -96,7 +96,7 @@ header {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Comic Sans MS", cursive;
+    font-family: "Comic Neue", "Comic Sans MS", cursive;
     color: #8a2be2;
     text-shadow: 0 0 2px rgba(138, 43, 226, 1);
 }
@@ -105,7 +105,7 @@ nav {
     margin-top: 10px;
 }
 
-nav a {
+nav a, nav a:hover, body.blog-page nav a, body.blog-page nav a:hover {
     text-decoration: none;
     margin: 0 10px;
     font-size: 18px;
@@ -401,7 +401,7 @@ body.blog-page a:hover {
 }
 
 .toggle-button {
-    font-family: "Comic Sans MS", cursive;
+    font-family: "Comic Neue", "Comic Sans MS", cursive;
     background-color: #c0c0c0;
     border: 2px outset #ffffff;
     padding: 2px;
@@ -479,7 +479,7 @@ body.blog-page a:hover {
 }
 
 #hit-counter {
-    font-family: "Comic Sans MS", cursive;
+    font-family: "Comic Neue", "Comic Sans MS", cursive;
     text-align: center;
     color: cyan;
 }
@@ -553,3 +553,4 @@ body.blog-page a:hover {
     fill: currentColor;
     font-size: 18px;
 }
+

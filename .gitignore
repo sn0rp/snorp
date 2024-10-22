@@ -13,3 +13,4 @@ yarn-error.log
 /music/*.wav
 visit_count.txt
 /ansible/*
+.htaccess
