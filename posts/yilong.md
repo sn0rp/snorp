@@ -12,7 +12,7 @@ Have you ever wondered what it would be like if Elon Musk tweeted in broken Chin
 
 Yilong Ma is a Chinese man who grew to fame for his imitation of Elon Musk on TikTok. He first entered my life a few months ago with this repost and it was love at first sight. When I was exposed to GPT-3 through the explosive launch of ChatGPT, an inevitable sequence of events was set in motion. Through my conversations with ChatGPT (“Chat” for short), I learned how to build an AI-powered Twitter bot, ultimately unleashing my imitation of an imitation upon the world in a matter of hours.
 
-### Beginnings
+## Beginnings
 I asked Chat a few introductory questions just to get a feel for how this might work. I quickly discovered that Twitter and OpenAI provide public APIs that could address the core functionality of my idea, so I made accounts with both to get my keys.
 
 Chat and I went back and forth for a little while as we refined the starter code for my bot. This definitely provided a solid foundation, however it was insufficient to create a functional bot due to the limited mental capability of Chat. I took my quest to YouTube, where the first relevant video I found was an excellent demonstration by Fireship, a channel very familiar to me. This gave me all the information I needed to produce a functional Twitter bot, but I had a very unique idea in mind.
@@ -21,7 +21,7 @@ My goal with Yilong Ma was to build a bot that would mimic Elon’s own tweets i
 
 Incidentally, there is a [verified twitter account](https://twitter.com/mayilong0) for the real Yilong Ma. I don’t take it too seriously since anybody can buy verification and I am 99% sure he is not Elon Musk.
 
-### How it Works
+## How it Works
 I started with a Firebase Cloud Functions project in accordance with the Fireship video. In retrospect this may not have been the best approach to my goal, but it was the fastest way to get started and I didn’t want to spend more than a day on this diversion.
 
 Excepting the starter code, the core logic is as follows:
@@ -84,23 +84,23 @@ function generatePrompt(elonRaw) {
 const { yilongTweet } = await refreshedClient.v2.tweet(yilongMaText);
 ```
 
-### Challenges
-#### Chat is a double-edged sword
+## Challenges
+### Chat is a double-edged sword
 I have found two main issues with Chat:
 1. Chat’s knowledge stops in 2021
 2. Chat lies
 
 As discussed, I gleaned from Chat an outline for the logic of my code. Behind the scenes, this involved persistence and careful rewording of my input in order to get information that was actually useful. The code snippets provided by Chat are not functional in 2023, but they did show me an approximation of how the relevant APIs could be used here without any time spent perusing documentation.
 
-#### Chat is a double-edged sword (again)
+### Chat is a double-edged sword (again)
 The API responses from GPT-3 were not exactly what I needed. They had inexplicable leading white space and quotes surrounding the main text. I am certain from testing that the quotes can be attributed to my prompt, even though I didn’t want them to be present. Since the inclusion of these characters is consistent among the responses, I found the least disruptive solution was to directly remove them after getting a response.
 
 Also, a response will occasionally be written entirely in Mandarin. This is was not my original intent, but it is uncommon enough that I consider it an entertaining quirk of Yilong’s tweeting style.
 
-#### A flaw with Fireship
+### A flaw with Fireship
 In the Fireship tutorial, database values are set before each tweet. In practice, this completely resets the database. That’s not an issue for the bot created in the video, but it is an issue when we compare Elon’s current latest tweet to the one stored in the database. I got around this by correctly guessing that there was an update function that would affect only explicitly chosen values.
 
-#### Hosting
+### Hosting
 Given that I used Firebase Cloud Functions for this project, a natural next step was to deploy them in order to automate the Twitter account. However, this proved to be ineffective given that I have API keys and helper functions outside of the code which would be deployed with this approach.
 
 I settled on creating a Systemd service to serve the API on my local machine, then added a GET request to cron:
@@ -118,7 +118,7 @@ User=redacted
 WantedBy=mult-user.target
 ```
 
-### He's Alive!
+## He's Alive!
 
 <div style="display: flex; justify-content: center;">
 <blockquote class="twitter-tweet">

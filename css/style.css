@@ -279,7 +279,7 @@ article {
 }
 
 pre[class*="language-"] {
-    width: 60%;
+    width: 80%;
     max-width: 800px;
     margin: 1em 0;
 }
