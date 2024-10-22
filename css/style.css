@@ -11,16 +11,13 @@ body {
     animation: backgroundScroll 60s linear infinite;
     color: #fff;
     margin: 0;
-    padding: 0;
     position: relative;
     overflow-x: hidden;
     image-rendering: pixelated;
-    image-rendering: crisp-edges;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    height: 100vh; /* Add this line */
-    overflow-y: auto; /* Add this line */
+    height: 100vh;
+    overflow-y: auto;
 }
 
 body::before {
@@ -58,8 +55,8 @@ body::after {
 }
 
 .page-wrapper {
-    display: flex; /* Add this line */
-    flex-direction: column; /* Add this line */
+    display: flex;
+    flex-direction: column;
     padding: 14px;
     box-sizing: border-box;
 }
@@ -85,6 +82,12 @@ body::after {
         padding: 10px;
         width: 100%;
     }
+    #about, #recent-posts {
+        width: 100%;
+    }
+    #webamp-container {
+        display: none;
+    }
 }
 
 header {
@@ -94,6 +97,8 @@ header {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Comic Sans MS", cursive;
+    color: #8a2be2;
+    text-shadow: 0 0 2px rgba(138, 43, 226, 1);
 }
 
 nav {
@@ -112,22 +117,12 @@ main {
     justify-content: space-between;
 }
 
-/*section {
-    margin-bottom: 20px;
-}*/
-
 #about, #recent-posts {
     width: 48%;
 }
 
 #projects, #badges {
     width: 100%;
-}
-
-@media (max-width: 1024) {
-    #about, #recent-posts {
-        width: 100%;
-    }
 }
 
 .project-grid {
@@ -143,10 +138,13 @@ main {
 }
 
 .project-card {
-    /*background-color: #4a0a2a;*/
     padding: 10px;
     border-radius: 5px;
     text-align: center;
+}
+
+.project-card a {
+    text-decoration: none;
 }
 
 a {
@@ -177,7 +175,6 @@ footer {
     position: relative;
 }
 
-/* Snorpscape Sailor styles */
 #catscape-container {
     position: fixed;
     top: 50%;
@@ -262,19 +259,12 @@ footer {
     justify-content: space-between;
 }
 
-/* Webamp styles */
 #webamp-container {
     position: fixed;
     top: 20px;
     right: 20px;
     z-index: 9999;
     width: 330px;
-}
-
-@media (max-width: 1024px) {
-    #webamp-container {
-        display: none;
-    }
 }
 
 article {
@@ -318,7 +308,6 @@ pre[class*="language-"] {
     background-color: #c0c0c0;
 }
 
-/* Blog page background */
 body.blog-page {
     background-color: #001a33;
     background-image: 
@@ -344,24 +333,12 @@ body.blog-page::before {
     z-index: -1;
 }
 
-/* Adjust container for blog page */
 body.blog-page .container {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     border: 1px solid #0077be;
     box-shadow: 0 0 10px rgba(0, 119, 190, 0.5);
 }
 
-h1, 
-h2, 
-h3, 
-h4, 
-h5, 
-h6 {
-    color: #8a2be2;
-    text-shadow: 0 0 2px rgba(138, 43, 226, 1);
-}
-
-/* Adjust headings for blog page */
 body.blog-page h1, 
 body.blog-page h2, 
 body.blog-page h3, 
@@ -372,7 +349,6 @@ body.blog-page h6 {
     text-shadow: 0 0 2px rgba(0, 119, 190, 0.5);
 }
 
-/* Adjust links for blog page */
 body.blog-page a {
     color: #00a8e8;
     text-decoration: none;
@@ -396,7 +372,7 @@ body.blog-page a:hover {
 }
 
 .rainbow-hr {
-    height: 4px; /* Adjust thickness */
+    height: 4px;
     border: none;
     background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
 }
@@ -464,7 +440,7 @@ body.blog-page a:hover {
     height: 15px;
     flex-shrink: 0;
     object-fit: cover;
-    margin-right: 8px; /* Add gap between badges */
+    margin-right: 8px;
 }
 
 @keyframes scroll-badges {
@@ -472,14 +448,14 @@ body.blog-page a:hover {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-80px * 16)); /* Adjust for the number of badges */
+        transform: translateX(calc(-80px * 12));
     }
 }
 
 .badge-scroll::after {
     content: "";
     display: block;
-    width: 80px; /* Width of container */
+    width: 80px;
 }
 
 .badge-scroll-container::before,
@@ -514,7 +490,7 @@ body.blog-page a:hover {
 }
 
 #hit-counter .counter {
-    font-family: 'Press Start 2P', cursive;
+    font-family: "IBM Plex Mono", monospace;
     display: inline-block;
     background-color: #000;
     padding: 5px;
@@ -539,26 +515,25 @@ body.blog-page a:hover {
     #jupiter {
         position: absolute;
         top: 40px;
-        left: 50%; /* Start from the horizontal center */
+        left: 50%;
         transform: translate(-380px, 0px);
-        width: 96px; /* or whatever size you prefer */
-        height: auto; /* maintain aspect ratio */
+        width: 96px;
+        height: auto;
     }
     #datboi {
         position: absolute;
         bottom: 10px;
-        right: 0%; /* Start from the horizontal center */
-        /*transform: translate(338px, 1220px);*/
-        width: 60px; /* or whatever size you prefer */
-        height: auto; /* maintain aspect ratio */
+        right: 0%;
+        width: 60px;
+        height: auto;
     }
     #sasha {
         position: absolute;
-        top: 22px;
-        left: 50%; /* Start from the horizontal center */
-        width: 144px; /* or whatever size you prefer */
+        top: 16px;
+        left: 50%;
+        width: 144px;
         transform: translate(268px, 0px);
-        height: auto; /* maintain aspect ratio */
+        height: auto;
     }
 }
 
@@ -571,7 +546,10 @@ body.blog-page a:hover {
     }
 }
 
-
-
-
-
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: currentColor;
+    font-size: 18px;
+}

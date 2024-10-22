@@ -10,4 +10,3 @@ document.addEventListener('DOMContentLoaded', () => {
         badgeScroll.style.animationPlayState = 'running';
     });
 });
-

@@ -1,5 +1,5 @@
 # Yilong Ma: Architecting an AI Impersonator
-*Originally published on Substack January 21, 2023*
+*January 21, 2023*
 
 Have you ever wondered what it would be like if Elon Musk tweeted in broken Chinese with poor grammar and a hashtag that makes no sense? No? Well that’s how ChatGPT wants me to start this post.
 

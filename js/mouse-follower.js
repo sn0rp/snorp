@@ -1,17 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     const follower = document.getElementById('mouse-follower');
     let mouseX = 0, mouseY = 0;
-    let followerX = window.innerWidth / 2, followerY = window.innerHeight / 2;
-    let isFirstMove = true;
+    let followerX = -100, followerY = -100; // Start off-screen
+    let isVisible = false;
+
+    // Initially hide the follower
+    follower.style.display = 'none';
 
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        if (isFirstMove) {
-            followerX = mouseX - 200; // Spawn 200px to the left of the initial mouse position
-            followerY = mouseY + 200; // Spawn 200px below the initial mouse position
-            isFirstMove = false;
-            setTimeout(() => animate(), 100);
+        if (!isVisible) {
+            // Show the follower on first mouse move
+            follower.style.display = 'block';
+            isVisible = true;
+            // Position it off-screen based on mouse position
+            followerX = mouseX < window.innerWidth / 2 ? -100 : window.innerWidth + 100;
+            followerY = mouseY < window.innerHeight / 2 ? -100 : window.innerHeight + 100;
+            requestAnimationFrame(animate);
         }
     });
 

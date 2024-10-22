@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
     let x = Math.random() * (window.innerWidth - dvdLogo.offsetWidth);
     let y = Math.random() * (window.innerHeight - dvdLogo.offsetHeight);
-    let xSpeed = 1; // Reduced from 2 to 1
-    let ySpeed = 1; // Reduced from 2 to 1
+    let xSpeed = 1;
+    let ySpeed = 1;
 
     function updatePosition() {
         if (x + dvdLogo.offsetWidth >= window.innerWidth || x <= 0) {
