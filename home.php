@@ -62,7 +62,7 @@ class ProjectCard {
 }
 
 $projects = [
-    new ProjectCard("/images/projects/jobertdemo.png", "Jobert", "Web application for tracking job applications, providing insights through data visualization and automating job search tasks", "https://github.com/sn0rp/jobert"),
+    new ProjectCard("/images/projects/jobertdemo.png", "Jobert", "Web application for tracking, automating, and visualizing job applications", "https://github.com/sn0rp/jobert"),
     new ProjectCard("/images/projects/quotes.png", "Inspirational Quotes", "Web app that creates humorous, AI-generated inspirational quotes on demand", "https://github.com/sn0rp/quotes"),
     new ProjectCard("/images/projects/printerFrustrationMin.png", "Arduino Uno R4 USB Host Library", "Why doesn't this already exist??? WIP!"),
     //new ProjectCard("https://placewaifu.com/image/200/150", "Project 3", "Description of Project 3", "#"),
