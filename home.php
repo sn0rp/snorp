@@ -42,28 +42,29 @@ class ProjectCard {
     }
 
     public function render() {
-        $linkHtml = $this->link
-            ? "<a href=\"{$this->link}\" class=\"external-link\">
-                 <svg class=\"icon\"><use xlink:href=\"#icon-link\"></use></svg>
-               </a>"
-            : "";
-
+        $wrapperStart = $this->link ? "<a href=\"{$this->link}\"" : "<div";
+        $wrapperEnd = $this->link ? "</a>" : "</div>";
+        
         return "
-            <div class=\"project-card\">
-                <img src=\"{$this->image}\" alt=\"{$this->title}\" style=\"max-height:200px;\">
-                <h3>
-                    {$linkHtml} 
-                    {$this->title}
-                </h3>
-                <p>{$this->description}</p>
-            </div>
+            {$wrapperStart} class=\"project-card\">
+                <div class=\"project-card-image\">
+                    <img src=\"{$this->image}\" alt=\"{$this->title}\">
+                </div>
+                <div class=\"project-card-content\">
+                    <h3>
+                        {$this->title}
+                        " . "
+                    </h3>
+                    <p>{$this->description}</p>
+                </div>
+            {$wrapperEnd}
         ";
     }
 }
 
 $projects = [
     new ProjectCard("/images/projects/jobertdemo.png", "Jobert", "Web app for tracking, automating, and visualizing job applications", "https://github.com/sn0rp/jobert"),
-    new ProjectCard("/images/projects/quotes.png", "Inspirational Quotes", "Web app that creates humorous, AI-generated inspirational quotes on demand", "https://github.com/sn0rp/quotes"),
+    new ProjectCard("/images/projects/weather.png", "Weather", "Most rapidly useful weather app, live at weather.snorp.dev", "https://github.com/sn0rp/weather"),
     new ProjectCard("/images/projects/printerFrustrationMin.png", "Arduino Uno R4 USB Host Library", "Why doesn't this already exist??? WIP!"),
     //new ProjectCard("https://placewaifu.com/image/200/150", "Project 3", "Description of Project 3", "#"),
 ];
@@ -164,7 +165,7 @@ $visitCount = incrementVisitCount();
                 </section>
                 
                 <section id="projects">
-                    <h2>Creations</h2>
+                    <h2>Incredible Stuff</h2>
                     <div class="project-grid">
                         <?php foreach ($projects as $project): ?>
                             <?= $project->render() ?>
@@ -187,13 +188,11 @@ $visitCount = incrementVisitCount();
                             <img src="/images/badges/loveanime.gif" alt="Badge">
                             <img src="/images/badges/nosmoking.gif" alt="Badge">
                             <img src="/images/badges/piano.gif" alt="Badge">
-                            <img src="/images/badges/texan.gif" alt="Badge">
                             <img src="/images/badges/vim_the_editor.png" alt="Badge">
                             <img src="/images/badges/xp.gif" alt="Badge">
                             <!--loop-->
                             <img src="/images/badges/nosmoking.gif" alt="Badge">
                             <img src="/images/badges/piano.gif" alt="Badge">
-                            <img src="/images/badges/texan.gif" alt="Badge">
                             <img src="/images/badges/vim_the_editor.png" alt="Badge">
                             <img src="/images/badges/xp.gif" alt="Badge">
                         </div>
