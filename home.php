@@ -65,7 +65,7 @@ class ProjectCard {
 $projects = [
     new ProjectCard("/images/projects/jobertdemo.png", "Jobert", "Web app for tracking, automating, and visualizing job applications", "https://github.com/sn0rp/jobert"),
     new ProjectCard("/images/projects/weather.png", "Weather", "Most rapidly useful weather app, live at weather.snorp.dev", "https://github.com/sn0rp/weather"),
-    new ProjectCard("/images/projects/printerFrustrationMin.png", "Arduino Uno R4 USB Host Library", "Why doesn't this already exist??? WIP!"),
+    //new ProjectCard("/images/projects/printerFrustrationMin.png", "Arduino Uno R4 USB Host Library", "Why doesn't this already exist??? WIP!"),
     //new ProjectCard("https://placewaifu.com/image/200/150", "Project 3", "Description of Project 3", "#"),
 ];
 

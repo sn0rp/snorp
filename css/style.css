@@ -563,6 +563,24 @@ body.blog-page a:hover {
     font-size: 8px;
 }
 
+@keyframes datboi-ride {
+    0% {
+        transform: translate(0, 0) scaleX(1);
+    }
+    45% {
+        transform: translate(-700px, 0) scaleX(1);
+    }
+    50% {
+        transform: translate(-700px, 0) scaleX(-1);
+    }
+    95% {
+        transform: translate(0, 0) scaleX(-1);
+    }
+    100% {
+        transform: translate(0, 0) scaleX(1);
+    }
+}
+
 @media (min-width: 1440px) {
     #howard {
         position: fixed;
@@ -583,6 +601,7 @@ body.blog-page a:hover {
         right: 0%;
         width: 60px;
         height: auto;
+        animation: datboi-ride 10s linear infinite;
     }
     #sasha {
         position: absolute;
@@ -610,4 +629,3 @@ body.blog-page a:hover {
     fill: currentColor;
     font-size: 18px;
 }
-
