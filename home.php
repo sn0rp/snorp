@@ -258,30 +258,9 @@ $visitCount = incrementVisitCount();
                         {
                             metaData: {
                                 artist: "Streambeats",
-                                title: "Electrolyte",
-                            },
-                            url: "/music/electrolyte.mp3",
-                        },
-                        {
-                            metaData: {
-                                artist: "Streambeats",
                                 title: "Stuck in Wonderland",
                             },
                             url: "/music/stuck-in-wonderland.mp3",
-                        },
-                        {
-                            metaData: {
-                                artist: "Squishyboi",
-                                title: "Voyager",
-                            },
-                            url: "/music/voyager-battle.mp3",
-                        },
-                        {
-                            metaData: {
-                                artist: "Squishyboi",
-                                title: "Augmented",
-                            },
-                            url: "/music/augmented-battle.mp3",
                         },
                     ],
                 }).renderWhenReady(document.getElementById('webamp-container')).then(() => {
