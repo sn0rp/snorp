@@ -149,7 +149,7 @@ $visitCount = incrementVisitCount();
             <main>
                 <section id="about">
                     <h2>About Me</h2>
-                    <p>I'm a software engineer specializing in cloud computing and automation. In my free time, I'm diving into machine learning and embedded systems. When I'm not coding, you might find me optimizing my health, exploring nature, or playing piano. I'm driven by curiosity and a determination to turn "impossible" into "done." Always up for a challenge.</p>
+                    <p>I'm a software engineer specializing in cloud computing and automation, diving into machine learning and embedded systems during my free time. Otherwise interested in fitness, nutrition, piano, and aircraft. Always up for a challenge.</p>
                 </section>
                 
                 <section id="recent-posts">
