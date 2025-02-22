@@ -18,6 +18,7 @@ body {
     flex-direction: column;
     height: 100vh;
     overflow-y: auto;
+    min-height: 100vh;
 }
 
 body::before {
@@ -59,6 +60,8 @@ body::after {
     flex-direction: column;
     padding: 14px;
     box-sizing: border-box;
+    min-height: 0;
+    height: 100%;
 }
 
 .container {
@@ -78,13 +81,32 @@ body::after {
     .page-wrapper {
         padding: 10px;
     }
+    
     .container {
         padding: 10px;
         width: 100%;
     }
+    
+    /* Homepage mobile layout */
     #about, #recent-posts {
         width: 100%;
+        margin-bottom: 20px;
     }
+    
+    #projects {
+        width: 100%;
+    }
+    
+    /* Biznus mobile layout */
+    .biznus-page .container {
+        height: 100vh;
+    }
+    
+    .biznus-page main {
+        height: auto;
+        flex: 1;
+    }
+    
     #webamp-container {
         display: none;
     }
@@ -227,9 +249,12 @@ a {
 }
 
 footer {
-    text-align: center;
-    font-size: 14px;
+    margin-top: auto;
     position: relative;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 14px;
 }
 
 #catscape-container {
@@ -628,4 +653,116 @@ body.blog-page a:hover {
     vertical-align: -0.125em;
     fill: currentColor;
     font-size: 18px;
+}
+
+.biznus-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.biznus-tab {
+    padding: 10px 20px;
+    color: inherit;
+    background: rgba(138, 43, 226, 0.2);
+    border: 1px solid #8a2be2;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.biznus-tab.active {
+    background: rgba(138, 43, 226, 0.4);
+}
+
+.biznus-tab:hover {
+    background: rgba(138, 43, 226, 0.3);
+}
+
+.biznus-content {
+    display: none;
+    width: 100%;
+    margin-bottom: 20px;
+    flex: 1;
+    min-height: 0;
+}
+
+.biznus-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+.biznus-frame {
+    width: 100%;
+    flex: 1;
+    min-height: 500px;
+    border: 1px solid #8a2be2;
+    background: rgba(0, 0, 0, 0.3);
+    display: block;
+}
+
+.biznus-page .container {
+    min-height: 0;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.biznus-page main {
+    flex: 1;
+    min-height: 0;
+    flex-wrap: nowrap;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    overflow-y: auto;
+}
+
+.instructions {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid #8a2be2;
+    padding: 15px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.instructions h3 {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .biznus-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .biznus-tab {
+        flex: 1 1 calc(50% - 10px);
+        min-width: 120px;
+        text-align: center;
+    }
+
+    .biznus-frame {
+        height: 60vh;
+    }
+
+    .instructions {
+        font-size: 14px;
+    }
+
+    .instructions ul {
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .biznus-tab {
+        flex: 1 1 100%;
+    }
+
+    .biznus-frame {
+        height: 50vh;
+    }
 }

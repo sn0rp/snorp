@@ -15,6 +15,9 @@ switch ($path) {
         // Blog listing page
         include 'blog.php';
         break;
+    case 'biznus':
+        include 'biznus.php';
+        break;
     default:
         // Check if it's a blog post
         if (preg_match('/^blog\/(.+)$/', $path, $matches)) {

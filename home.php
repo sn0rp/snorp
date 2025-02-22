@@ -63,8 +63,8 @@ class ProjectCard {
 }
 
 $projects = [
-    new ProjectCard("/images/projects/jobertdemo.png", "Jobert", "Web app for tracking, automating, and visualizing job applications", "https://github.com/sn0rp/jobert"),
-    new ProjectCard("/images/projects/weather.png", "Weather", "Most rapidly useful weather app, live at weather.snorp.dev", "https://github.com/sn0rp/weather"),
+    new ProjectCard("/images/projects/biznus.png", "Biznus Applications", "Everything you need to do serious biznus", "/biznus"),
+    new ProjectCard("/images/projects/weather.png", "Weather", "Best weather app in the world", "https://weather.snorp.dev"),
     //new ProjectCard("/images/projects/printerFrustrationMin.png", "Arduino Uno R4 USB Host Library", "Why doesn't this already exist??? WIP!"),
     //new ProjectCard("https://placewaifu.com/image/200/150", "Project 3", "Description of Project 3", "#"),
 ];
@@ -183,18 +183,15 @@ $visitCount = incrementVisitCount();
                             <img src="/images/badges/badgemath.png" alt="Badge">
                             <img src="/images/badges/badgephysics.png" alt="Badge">
                             <img src="/images/badges/Archlinux_80x15.png" alt="Badge">
-                            <img src="/images/badges/f-22_6.gif" alt="Badge">
                             <img src="/images/badges/fl_isr.gif" alt="Badge">
                             <img src="/images/badges/loveanime.gif" alt="Badge">
                             <img src="/images/badges/nosmoking.gif" alt="Badge">
                             <img src="/images/badges/piano.gif" alt="Badge">
                             <img src="/images/badges/vim_the_editor.png" alt="Badge">
-                            <img src="/images/badges/xp.gif" alt="Badge">
                             <!--loop-->
                             <img src="/images/badges/nosmoking.gif" alt="Badge">
                             <img src="/images/badges/piano.gif" alt="Badge">
                             <img src="/images/badges/vim_the_editor.png" alt="Badge">
-                            <img src="/images/badges/xp.gif" alt="Badge">
                         </div>
                     </div>
                     <hr class="rainbow-hr">

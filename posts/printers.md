@@ -173,12 +173,6 @@ This minimal example should serve as a proof of concept for the USB communicatio
 
 Indeed, I have since discovered that there are **no** USB host libraries available for the newest revision of the board. Furthermore, the Arduino USB Host Shield has been discontinued.
 
-## Current Status and Next Steps
-The journey so far has involved a deep dive into USB protocols, printer communication methods, and embedded programming. There are a few potential approaches to move forward from here:
-1. Purchase an Arduino or similar board with functional USB host support
-2. Use something like a Raspberry Pi for a higher-level approach
-3. Write a library for the RA4M1-based Arduinos to enable the dormant USB host functionality
+---
 
-For such a trivial project, the pragmatic solution is clearly to use the Raspberry Pi and get this working in an afternoon. That is the approach I will take in order to terminate this project and move on. However, I also took on this task in order to deepen my understanding of embedded programming. To that end, I have decided to pursue Approach #3 as a separate project.
-
-Thus, I plan on writing the first(?) USB host library for RA4M1-based Arduino boards. As the saying goes, I have concepts of a plan.
+The journey so far has involved a deep dive into USB protocols, printer communication methods, and embedded programming. Enriched with all of this information, it is clear that the best solution is a higher-level approach with a Raspberry Pi running a print server.
