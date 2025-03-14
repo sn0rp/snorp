@@ -1,5 +1,5 @@
 body {
-    font-family: "IBM Plex Mono", monospace;
+    font-family: "Comic Neue", "IBM Plex Mono", monospace;
     background-color: #2a0a4a;
     background-image: 
         radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
@@ -669,6 +669,7 @@ body.blog-page a:hover {
     background: rgba(138, 43, 226, 0.2);
     border: 1px solid #8a2be2;
     cursor: pointer;
+    font-family: "Comic Neue";
     transition: all 0.3s ease;
     z-index: 10;
 }
