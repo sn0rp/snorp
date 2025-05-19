@@ -101,6 +101,7 @@ $visitCount = incrementVisitCount();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
     <script src="/js/mouse-follower.js" defer></script>
     <script src="/js/dvd-screensaver.js" defer></script>
     <script src="/js/badge-scroll.js" defer></script>
@@ -144,6 +145,10 @@ $visitCount = incrementVisitCount();
                     <button id="toggle-follower" class="toggle-button">Toggle Follower</button>
                     <button id="virus-attack" class="toggle-button">DON'T CLICK</button>
                 </div>
+                <br>
+                <div>
+                    <h1 style='text-align:center;font-family:"Tangerine",cursive;color:#fff'>"The clock is round in both directions"</h1>
+                </div>
             </header>
             
             <main>
@@ -151,9 +156,7 @@ $visitCount = incrementVisitCount();
                     <h2>About Me</h2>
                     <!--<p>I'm a software engineer specializing in cloud computing and automation, diving into machine learning and embedded systems during my free time. Otherwise interested in aircraft, fitness, nutrition, and piano. Always up for a challenge.</p>-->
                     <ul>
-                    <li>Master of Vibe Driven Development</li>    
-                        <li>Software engineer in the cloud</li>
-                        <li>Builder of things that matter</li>
+                        <li>Master of Vibe Driven Development</li>    
                         <li>Discount Bryan Johnson</li>
                         <li>Lifelong okay pianist</li>
                     </ul>
