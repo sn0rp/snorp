@@ -1,32 +1,11 @@
 <?php
+require_once 'includes/PostManager.php';
 require_once 'vendor/autoload.php';
 
 ini_set('display_errors', 0);
 
-function getRecentPosts($limit = 4) {
-    $posts = glob('posts/*.md');
-    usort($posts, function($a, $b) {
-        return filemtime($b) - filemtime($a);
-    });
-    $recentPosts = array_slice($posts, 0, $limit);
-    return array_map(function($post) {
-        return [
-            'file' => $post,
-            'title' => getPostTitle($post)
-        ];
-    }, $recentPosts);
-}
-
-function getPostTitle($filePath) {
-    if (!is_file($filePath) || !preg_match('/^posts\/[a-zA-Z0-9-_]+\.md$/', $filePath)) {
-        return 'Invalid file';
-    }
-    $content = file_get_contents($filePath);
-    if (preg_match('/^#\s*(.+)$/m', $content, $matches)) {
-        return trim($matches[1]);
-    }
-    return basename($filePath, '.md');
-}
+$postManager = new PostManager();
+$recentPosts = $postManager->getRecentPosts(4);
 
 class ProjectCard {
     public $image;
@@ -69,8 +48,6 @@ $projects = [
     //new ProjectCard("https://placewaifu.com/image/200/150", "Project 3", "Description of Project 3", "#"),
 ];
 
-$recentPosts = getRecentPosts();
-
 function incrementVisitCount() {
     $countFile = __DIR__ . '/visit_count.txt';
     if (file_exists($countFile)) {
@@ -99,14 +76,13 @@ $visitCount = incrementVisitCount();
     <script src="/js/catscape.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Imperial+Script&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
-    <script src="/js/mouse-follower.js" defer></script>
+    <!--<script src="/js/mouse-follower.js" defer></script>-->
     <script src="/js/dvd-screensaver.js" defer></script>
-    <script src="/js/badge-scroll.js" defer></script>
+    <!--<script src="/js/badge-scroll.js" defer></script>-->
     <script src="/js/wobbly-text.js" defer></script>
-    <script src="/js/virus-attack.js" defer></script>
+    <!--<script src="/js/virus-attack.js" defer></script>-->
     <script src="/js/click-explosion.js" defer></script>
 </head>
 <body>
@@ -123,31 +99,37 @@ $visitCount = incrementVisitCount();
         <symbol id="icon-link" viewBox="0 0 640 512">
             <path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/>
         </symbol>
+        <symbol id="icon-youtube" viewBox="0 0 640 640">
+            <path d="M581.7 188.1C575.5 164.4 556.9 145.8 533.4 139.5C490.9 128 320.1 128 320.1 128C320.1 128 149.3 128 106.7 139.5C83.2 145.8 64.7 164.4 58.4 188.1C47 231 47 320.4 47 320.4C47 320.4 47 409.8 58.4 452.7C64.7 476.3 83.2 494.2 106.7 500.5C149.3 512 320.1 512 320.1 512C320.1 512 490.9 512 533.5 500.5C557 494.2 575.5 476.3 581.8 452.7C593.2 409.8 593.2 320.4 593.2 320.4C593.2 320.4 593.2 231 581.8 188.1zM264.2 401.6L264.2 239.2L406.9 320.4L264.2 401.6z"/>
+        </symbol>
     </svg>
     <div class="page-wrapper">
         <div class="container">
             <header>
                 <h1 id="wobble">Snorp</h1>
                 <nav>
-                    <a href="/" class="home-link">
+                    <!--<a href="/" class="home-link">
                         <svg class="icon"><use xlink:href="#icon-house"></use></svg>
-                    </a>
+                    </a>-->
                     <a href="https://github.com/sn0rp" class="external-link">
                         <svg class="icon"><use xlink:href="#icon-github"></use></svg>
                     </a>
                     <a href="https://x.com/_snorp" class="external-link">
                         <svg class="icon"><use xlink:href="#icon-x-twitter"></use></svg>
                     </a>
+                    <a href="https://youtube.com/@_snorp" class="external-link">
+                        <svg class="icon"><use xlink:href="#icon-youtube"></use></svg>
+                    </a>
                 </nav>
-                <img src="/images/under-construction.gif" alt="under construction" style="width: 210px;"/>
+                <!--<img src="/images/under-construction.gif" alt="under construction" style="width: 210px;"/>-->
                 <div class="toggle-buttons">
-                    <button id="toggle-dvd" class="toggle-button">Toggle DVD</button>
-                    <button id="toggle-follower" class="toggle-button">Toggle Follower</button>
-                    <button id="virus-attack" class="toggle-button">DON'T CLICK</button>
+                    <!--<button id="toggle-dvd" class="toggle-button">Toggle DVD</button>-->
+                    <!--<button id="toggle-follower" class="toggle-button">Toggle Follower</button>-->
+                    <!--<button id="virus-attack" class="toggle-button">DON'T CLICK</button>-->
                 </div>
                 <br>
                 <div>
-                    <h1 style='text-align:center;font-family:"Tangerine",cursive;color:#fff'>"The clock is round in both directions"</h1>
+                    <h1 style='text-align:center;font-family:"Great Vibes",cursive;font-weight:200;color:#fff'>"The clock is round in both directions"</h1>
                 </div>
             </header>
             
@@ -156,71 +138,89 @@ $visitCount = incrementVisitCount();
                     <h2>About Me</h2>
                     <!--<p>I'm a software engineer specializing in cloud computing and automation, diving into machine learning and embedded systems during my free time. Otherwise interested in aircraft, fitness, nutrition, and piano. Always up for a challenge.</p>-->
                     <ul>
-                        <li>Master of Vibe Driven Development</li>    
                         <li>Discount Bryan Johnson</li>
-                        <li>Lifelong okay pianist</li>
+                        <li>&quot;Good with computers&quot;</li>    
+                        <li>I control the <a href="https://weather.snorp.dev">weather</a></li>
+                        <li>Got hit by a bus</li>
                     </ul>
                 </section>
                 
                 <section id="recent-posts">
                     <h2>Recent Posts</h2>
+                    <?php if (empty($recentPosts)): ?>
+                        <p>No posts yet!</p>
+                    <?php else: ?>
                     <ul>
                         <?php foreach ($recentPosts as $post): ?>
-                            <li><a href="/blog/<?= basename($post['file'], '.md') ?>" class="catscape-link"><?= $post['title'] ?></a></li>
+                            <li>
+                                <a href="/blog/<?= $post['slug'] ?>" class="catscape-link">
+                                    <?= htmlspecialchars($post['title']) ?>
+                                </a><br>
+                                <span style="font-size: 14px; opacity: 0.8; margin-left: 8px;">
+                                    <?= date('M j, Y', $post['timestamp']) ?>
+                                </span>
+                                <?php if (!empty($post['categories'])): ?>
+                                        <?php foreach (array_slice($post['categories'], 0, 2) as $cat): ?>
+                                            <span style="opacity: 0.5">/ <?= htmlspecialchars($cat) ?></span>
+                                        <?php endforeach; ?>
+                                <?php endif; ?>
+                            </li>
                         <?php endforeach; ?>
                     </ul>
-                    <?php if (count(glob('posts/*.md')) > 10): ?>
-                        <a href="/blog" class="catscape-link">More posts...</a>
+                    <div style="text-align:right;padding-right:20px">
+                    <a href="/blog"">View all &rarr;</a></div>
                     <?php endif; ?>
                 </section>
                 
-                <section id="projects">
+                <!--<section id="projects">
                     <h2>Incredible Stuff</h2>
                     <div class="project-grid">
-                        <?php foreach ($projects as $project): ?>
+                        <?php /*foreach ($projects as $project): ?>
                             <?= $project->render() ?>
-                        <?php endforeach; ?>
+                        <?php endforeach; */?>
                     </div>
-                </section>
+                </section>-->
                 
                 <section id="badges">
                     <br>
-                    <div class="badge-container">
+                    <!--<div class="badge-container">
                         <img src="/images/badges/snorpBadge.png" alt="Badge">
-                    </div>
+                    </div>-->
                     <div class="badge-scroll-container">
                         <div class="badge-scroll">
-                            <img src="/images/badges/badgemath.png" alt="Badge">
-                            <img src="/images/badges/badgephysics.png" alt="Badge">
+                            <!--<img src="/images/badges/badgemath.png" alt="Badge">
+                            <img src="/images/badges/badgephysics.png" alt="Badge">-->
                             <img src="/images/badges/Archlinux_80x15.png" alt="Badge">
-                            <img src="/images/badges/fl_isr.gif" alt="Badge">
                             <img src="/images/badges/loveanime.gif" alt="Badge">
+                            <img src="/images/badges/fl_isr.gif" alt="Badge">
+                            <!--<img src="/images/badges/nosmoking.gif" alt="Badge">-->
+                            <img src="/images/badges/piano.gif" alt="Badge">
+                            <!--<img src="/images/badges/vim_the_editor.png" alt="Badge">-->
+                            <!--loop--><!--
                             <img src="/images/badges/nosmoking.gif" alt="Badge">
                             <img src="/images/badges/piano.gif" alt="Badge">
-                            <img src="/images/badges/vim_the_editor.png" alt="Badge">
-                            <!--loop-->
-                            <img src="/images/badges/nosmoking.gif" alt="Badge">
-                            <img src="/images/badges/piano.gif" alt="Badge">
-                            <img src="/images/badges/vim_the_editor.png" alt="Badge">
+                            <img src="/images/badges/vim_the_editor.png" alt="Badge">-->
+                            <img src="/images/badges/snorpBadge.png" alt="Badge">
                         </div>
                     </div>
-                    <hr class="rainbow-hr">
+                    <!--<hr class="rainbow-hr">-->
                 </section>
             </main>
             
             <footer>
-                <div id="hit-counter">
+                <!--<div id="hit-counter">
                     <span>Visits</span>
                     <div class="counter">
-                        <?php 
+                        <?php /*
                             $paddedCount = str_pad($visitCount, 8, '0', STR_PAD_LEFT);
                             for ($i = 0; $i < strlen($paddedCount); $i++) {
                                 echo '<span class="digit">' . $paddedCount[$i] . '</span>';
-                            }
+                            }*/
                         ?>
                     </div>
                 </div>
-                <p>&copy; <?php echo date("Y"); ?> Snorp. All rights reserved.</p>
+                <p>&copy; <?php echo date("Y"); ?> Snorp. All rights reserved.</p>-->
+                <br><br>
                 <img src="/images/datboi.gif" alt="datboi" id="datboi">
             </footer>
         </div>
@@ -284,10 +284,10 @@ $visitCount = incrementVisitCount();
             }
         </script>
     </div>
-    <div id="mouse-follower"></div>
+    <!--<div id="mouse-follower"></div>-->
     <div id="dvd-logo">DVD</div>
     <img src="/images/howard.gif" alt="howard" id="howard">
-    <img src="/images/jupiter.gif" alt="jupiter" id="jupiter">
+    <!--<img src="/images/jupiter.gif" alt="jupiter" id="jupiter">-->
     <img src="/images/sasha.gif" alt="sasha" id="sasha">
 </body>
 </html>

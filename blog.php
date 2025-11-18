@@ -1,52 +1,32 @@
 <?php
-require_once 'vendor/autoload.php';
+require_once 'includes/PostManager.php';
 
-function getPostList() {
-    $posts = glob('posts/*.md');
-    usort($posts, function($a, $b) {
-        return filemtime($b) - filemtime($a);
-    });
-    return array_map(function($post) {
-        return [
-            'file' => $post,
-            'title' => getPostTitle($post)
-        ];
-    }, $posts);
-}
+$postManager = new PostManager();
 
-$parsedown = new Parsedown();
-$posts = getPostList();
-
-function getPostTitle($filePath) {
-    if (!is_file($filePath) || !preg_match('/^posts\/[a-zA-Z0-9-_]+\.md$/', $filePath)) {
-        return 'Invalid file';
-    }
-    $content = file_get_contents($filePath);
-    if (preg_match('/^#\s*(.+)$/m', $content, $matches)) {
-        return trim($matches[1]);
-    }
-    return basename($filePath, '.md');
-}
-
+// Handle post view vs list view
 if (isset($_GET['post'])) {
-    $postName = preg_replace('/[^a-zA-Z0-9-_]/', '', $_GET['post']);
-    $postFile = 'posts/' . $postName . '.md';
-    if (file_exists($postFile) && is_file($postFile)) {
-        $postContent = file_get_contents($postFile);
-        $postTitle = getPostTitle($postFile);
-        $postHtml = $parsedown->text($postContent);
-        
-        // Format code blocks for Prism
-        $postHtml = preg_replace_callback('/<pre><code class="language-([^"]+)">/', function($matches) {
-            return '<pre><code class="language-' . $matches[1] . '">';
-        }, $postHtml);
-        
-        $postHtml = preg_replace('/<pre><code class="language-([^"]+)">/', '<div class="centered-content"><pre><code class="language-$1">', $postHtml);
-        $postHtml = str_replace('</code></pre>', '</code></pre></div>', $postHtml);
+    $post = $postManager->getPost($_GET['post']);
+    $postHtml = $postManager->renderPost($post);
+    $postTitle = $post ? $post['title'] : 'Post Not Found';
+} else {
+    // Get filter parameters
+    $category = isset($_GET['category']) ? $_GET['category'] : null;
+    $tag = isset($_GET['tag']) ? $_GET['tag'] : null;
+    
+    // Get filtered or all posts
+    if ($category) {
+        $posts = $postManager->getPostsByCategory($category);
+        $pageTitle = "Posts in: $category";
+    } elseif ($tag) {
+        $posts = $postManager->getPostsByTag($tag);
+        $pageTitle = "Posts tagged: $tag";
     } else {
-        $postHtml = '<p>Post not found.</p>';
-        $postTitle = 'Post Not Found';
+        $posts = $postManager->getAllPosts();
+        $pageTitle = "All Posts";
     }
+    
+    $allCategories = $postManager->getAllCategories();
+    $allTags = $postManager->getAllTags();
 }
 ?>
 <!DOCTYPE html>
@@ -54,11 +34,11 @@ if (isset($_GET['post'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snorp Thoughts</title>
+    <title><?= isset($postTitle) ? $postTitle : 'Snorp Thoughts' ?></title>
     <link rel="icon" href="/images/snorp-sprite.png" type="image/png">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="/js/catscape.js" defer></script>
     <link rel="stylesheet" href="/css/prism-dracula.css">
+    <script src="/js/catscape.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,9 +57,6 @@ if (isset($_GET['post'])) {
         <symbol id="icon-x-twitter" viewBox="0 0 512 512">
             <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
         </symbol>
-        <symbol id="icon-link" viewBox="0 0 640 512">
-            <path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/>
-        </symbol>
     </svg>
     <div class="container">
         <header>
@@ -97,29 +74,91 @@ if (isset($_GET['post'])) {
             </nav>
         </header>
         
-        <main>
+        <main class="blog-main">
             <?php if (isset($postHtml)): ?>
+                <!-- Single Post View -->
                 <article>
                     <?= $postHtml ?>
                 </article>
+                <div style="margin: 20px; 0">
+                    <a href="/blog">&larr; Back to all posts</a>
+                </div>
             <?php else: ?>
-                <h2>Blog Posts</h2>
-                <ul>
-                    <?php foreach ($posts as $post): ?>
-                        <li>
-                            <a href="/blog/<?= basename($post['file'], '.md') ?>" class="catscape-link">
-                                <?= $post['title'] ?>
-                            </a>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
+                <!-- Blog Index View -->
+                <h2><?= $pageTitle ?></h2>
+                
+                <!-- Filter Section -->
+                <div class="blog-filters" style="margin-bottom: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                    <?php if (!empty($allCategories)): ?>
+                        <div style="margin-bottom: 10px;">
+                            <strong>Categories:</strong>
+                            <?php if ($category): ?>
+                                <a href="/blog" style="margin-left: 10px;">Clear filter</a>
+                            <?php endif; ?>
+                            <div style="margin-top: 5px;">
+                                <?php foreach ($allCategories as $cat): ?>
+                                    <a href="/blog?category=<?= urlencode($cat) ?>" 
+                                       class="filter-tag <?= $category === $cat ? 'active' : '' ?>"
+                                       style="display: inline-block; margin: 3px; padding: 5px 10px; background: rgba(138, 43, 226, 0.3); border-radius: 4px; font-size: 14px;">
+                                        <?= htmlspecialchars($cat) ?>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <?php if (false): ?> <!--if (!empty($allTags))-->
+                        <div>
+                            <strong>Tags:</strong>
+                            <?php if ($tag): ?>
+                                <a href="/blog" style="margin-left: 10px;">Clear filter</a>
+                            <?php endif; ?>
+                            <div style="margin-top: 5px;">
+                                <?php foreach ($allTags as $t): ?>
+                                    <a href="/blog?tag=<?= urlencode($t) ?>" 
+                                       class="filter-tag <?= $tag === $t ? 'active' : '' ?>"
+                                       style="display: inline-block; margin: 3px; padding: 5px 10px; background: rgba(0, 119, 190, 0.3); border-radius: 4px; font-size: 12px;">
+                                        #<?= htmlspecialchars($t) ?>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                
+                <!-- Posts List -->
+                <?php if (empty($posts)): ?>
+                    <p>No posts found.</p>
+                <?php else: ?>
+                    <div class="posts-list">
+                        <?php foreach ($posts as $post): ?>
+                            <article class="post-preview" style="margin-bottom: 30px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 8px;">
+                                <h3 style="margin-top: 0;">
+                                    <a href="/blog/<?= $post['slug'] ?>" class="catscape-link">
+                                        <?= htmlspecialchars($post['title']) ?>
+                                    </a>
+                                </h3>
+                                <div class="post-meta" style="font-size: 14px; opacity: 0.8; margin-bottom: 10px;">
+                                    <span><?= date('F j, Y', $post['timestamp']) ?></span>
+                                    <?php if (!empty($post['categories'])): ?>
+                                        <span style="margin-left: 15px;">
+                                            <?php foreach ($post['categories'] as $cat): ?>
+                                                <a href="/blog?category=<?= urlencode($cat) ?>" style="margin-right: 5px;">
+                                                    <?= htmlspecialchars($cat) ?>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                                <p><?= htmlspecialchars($post['excerpt']) ?></p>
+                                <a href="/blog/<?= $post['slug'] ?>" class="catscape-link">Read more &rarr;</a>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             <?php endif; ?>
         </main>
-        
-        <footer>
-            <p>&copy; <?php echo date("Y"); ?> Snorp. All rights reserved.</p>
-        </footer>
-    </div>
+    </div><br>
     
     <div id="catscape-container" class="hidden">
         <div id="catscape-titlebar">

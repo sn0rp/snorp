@@ -1,5 +1,13 @@
+---
+title: "Yilong Ma: Architecting an AI Impersonator"
+date: 2021-01-21
+categories: [ai]
+tags: [gpt-3, openai, twitter, bot, firebase]
+excerpt: "Building a Twitter bot that mimics Elon Musk's tweets in the voice of his Chinese doppelgänger using GPT-3 and Firebase Cloud Functions."
+---
+
 # Yilong Ma: Architecting an AI Impersonator
-*January 21, 2023*
+*January 21, 2021*
 
 Have you ever wondered what it would be like if Elon Musk tweeted in broken Chinese with poor grammar and a hashtag that makes no sense? No? Well that’s how ChatGPT wants me to start this post.
 

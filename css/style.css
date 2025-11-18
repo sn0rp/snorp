@@ -68,7 +68,7 @@ body::after {
     max-width: 800px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     margin: 0 auto;
     box-sizing: border-box;
     border: 1px solid #8a2be2;
@@ -119,7 +119,7 @@ header {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Comic Neue", "Comic Sans MS", cursive;
-    color: #8a2be2;
+    color: #b387dd;
     text-shadow: 0 0 2px rgba(138, 43, 226, 1);
 }
 
@@ -135,6 +135,12 @@ nav a, nav a:hover, body.blog-page nav a, body.blog-page nav a:hover {
 
 main {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+main.blog-main {
+    display:block;
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -253,7 +259,7 @@ footer {
     position: relative;
     width: 100%;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 4px;
     font-size: 14px;
 }
 
@@ -468,7 +474,7 @@ body.blog-page a:hover {
     color: #ffffff;
     background-color: #000000;
     user-select: none;
-    z-index: 9998;
+    z-index: -1;
     border-radius: 50%;
     width: 60px;
     height: 30px;
@@ -503,6 +509,12 @@ body.blog-page a:hover {
 }
 
 .badge-scroll-container {
+    margin-top: 12px;
+    text-align: center;
+}
+
+/*
+.badge-scroll-container {
     width: 80px;
     height: 15px;
     overflow: hidden;
@@ -516,13 +528,13 @@ body.blog-page a:hover {
     left: 0;
     animation: scroll-badges 48s linear infinite;
 }
-
+*/
 .badge-scroll img {
     width: 80px;
     height: 15px;
     flex-shrink: 0;
     object-fit: cover;
-    margin-right: 8px;
+    margin: auto 0;
 }
 
 @keyframes scroll-badges {
@@ -607,10 +619,18 @@ body.blog-page a:hover {
 }
 
 @media (min-width: 1440px) {
-    #howard {
+    /*#howard {
         position: fixed;
-        top: 20px;
-        left: 0;
+        top: -60px;
+        left: 240px;
+        scale: 50%;
+    }*/
+    #howard {
+        scale: 50%;
+        position: absolute;
+        top: -60px;
+        right: 50%;
+        transform: translate(50px, 0px);
     }
     #jupiter {
         position: absolute;
