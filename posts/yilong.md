@@ -2,7 +2,6 @@
 title: "Yilong Ma: Architecting an AI Impersonator"
 date: 2021-01-21
 categories: [ai]
-tags: [gpt-3, openai, twitter, bot, firebase]
 excerpt: "Building a Twitter bot that mimics Elon Musk's tweets in the voice of his Chinese doppelgänger using GPT-3 and Firebase Cloud Functions."
 ---
 

@@ -2,7 +2,6 @@
 title: "Reverse Engineering an Ancient USB Printer"
 date: 2021-10-22
 categories: [reverse-engineering]
-tags: [arduino, usb, printers, embedded, canon]
 excerpt: "Transforming an old Canon Pixma MP480 into a wireless printer by reverse engineering its USB protocol and discovering why the Arduino Uno R4 wasn't the right choice."
 ---
 
