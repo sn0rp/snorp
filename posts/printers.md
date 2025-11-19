@@ -1,12 +1,12 @@
 ---
 title: "Reverse Engineering an Ancient USB Printer"
-date: 2021-10-22
+date: 2023-8-22
 categories: [reverse-engineering]
 excerpt: "Transforming an old Canon Pixma MP480 into a wireless printer by reverse engineering its USB protocol and discovering why the Arduino Uno R4 wasn't the right choice."
 ---
 
 # Reverse Engineering an Ancient USB Printer
-*October 22, 2021*
+*August 22, 2023*
 
 <div align="center"><img src="/images/blog/printer/justSetUpThePrinters.png" alt="Just Set Up the Printers" style="width:80%"/></div>
 In the age of IoT and "smart" everything, finding a printer that just prints without any bloated or invasive software is increasingly difficult. That's why I decided to breathe new life into my old and dumb Canon Pixma MP480 - a reliable, no-nonsense all-in-one printer with USB connectivity and zero smart features. The goal: transform it into a wireless printer that I can use securely within my home network.

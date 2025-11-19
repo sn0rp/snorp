@@ -1,12 +1,12 @@
 ---
 title: "Yilong Ma: Architecting an AI Impersonator"
-date: 2021-01-21
+date: 2022-12-5
 categories: [ai]
 excerpt: "Building a Twitter bot that mimics Elon Musk's tweets in the voice of his Chinese doppelgänger using GPT-3 and Firebase Cloud Functions."
 ---
 
 # Yilong Ma: Architecting an AI Impersonator
-*January 21, 2021*
+*December 5, 2022*
 
 Have you ever wondered what it would be like if Elon Musk tweeted in broken Chinese with poor grammar and a hashtag that makes no sense? No? Well that’s how ChatGPT wants me to start this post.
 
@@ -126,14 +126,14 @@ WantedBy=mult-user.target
 ```
 
 ## He's Alive!
-
+<!--
 <div style="display: flex; justify-content: center;">
 <blockquote class="twitter-tweet">
   <a href="https://twitter.com/_YilongMa/status/1616532433075142658"></a>
 </blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
-
+-->
 I set Yilong active the other day and enabled notifications for his account. After a few minutes I was notified of his first post, so he is functioning as expected. I leave you all with some of my favorite hashtags that were generated during testing:
 
 ```txt

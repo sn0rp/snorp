@@ -24,10 +24,8 @@ $visitCount = incrementVisitCount();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:image" content="" />
     <meta name="twitter:image" content="" />
-    <title>&#9732;Snorp Biznus Applications</title>
     <link rel="icon" href="/images/snorp-sprite.png" type="image/png">
     <link rel="stylesheet" href="/css/style.css">
-    <script src="https://unpkg.com/webamp@1.4.2/built/webamp.bundle.min.js"></script>
     <script src="/js/catscape.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -345,47 +343,6 @@ $visitCount = incrementVisitCount();
                 <span id="catscape-meta-title"></span>
             </div>
         </div>
-        
-        <div id="webamp-container"></div>
-        
-        <script>
-            const Webamp = window.Webamp;
-            if (window.innerWidth > 1024 && window.self === window.top) {
-                new Webamp({
-                    initialTracks: [
-                        {
-                            metaData: {
-                                artist: "Streambeats",
-                                title: "Rooftops",
-                            },
-                            url: "/music/rooftops.mp3",
-                        },
-                        {
-                            metaData: {
-                                artist: "Streambeats",
-                                title: "Manhattan Project",
-                            },
-                            url: "/music/manhattan-project.mp3",
-                        },
-                        {
-                            metaData: {
-                                artist: "Streambeats",
-                                title: "Stuck in Wonderland",
-                            },
-                            url: "/music/stuck-in-wonderland.mp3",
-                        },
-                    ],
-                }).renderWhenReady(document.getElementById('webamp-container')).then(() => {
-                    const webampElement = document.querySelector('#webamp');
-                    if (webampElement) {
-                        webampElement.style.position = 'fixed';
-                        webampElement.style.top = '200px';
-                        webampElement.style.right = '20px';
-                        webampElement.style.zIndex = '9999';
-                    }
-                });
-            }
-        </script>
     </div>
     <div id="mouse-follower"></div>
     <div id="dvd-logo">DVD</div>

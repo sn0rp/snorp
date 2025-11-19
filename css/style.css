@@ -106,10 +106,6 @@ body::after {
         height: auto;
         flex: 1;
     }
-    
-    #webamp-container {
-        display: none;
-    }
 }
 
 header {
@@ -345,14 +341,6 @@ footer {
     padding: 5px;
     display: flex;
     justify-content: space-between;
-}
-
-#webamp-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-    width: 330px;
 }
 
 article {
@@ -626,9 +614,9 @@ body.blog-page a:hover {
         scale: 50%;
     }*/
     #howard {
-        scale: 50%;
+        scale: 45%;
         position: absolute;
-        top: -60px;
+        top: -80px;
         right: 50%;
         transform: translate(50px, 0px);
     }
