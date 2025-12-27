@@ -170,6 +170,11 @@ $visitCount = incrementVisitCount();
                     <a href="/blog"">View all &rarr;</a></div>
                     <?php endif; ?>
                 </section>
+                <section id="extras">
+                    <p>
+                        NEW: I <a href="https://sn0rp.github.io/longs/">fixed YouTube Shorts</a>
+                    </p>
+                </section>
                 
                 <!--<section id="projects">
                     <h2>Incredible Stuff</h2>
